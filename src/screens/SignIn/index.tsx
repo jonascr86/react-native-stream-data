@@ -26,9 +26,20 @@ export function SignIn() {
   const theme = useTheme();
 
   // creates a function to handle sign in
-    // try to call and wait signIn
-    // if fails, display an Alert with the title "Erro SignIn" and message "Ocorreu um erro ao tentar logar no app"
+  // try to call and wait signIn
+  // if fails, display an Alert with the title "Erro SignIn" and message 
+  //"Ocorreu um erro ao tentar logar no app"
 
+  async function handleSignIn(){
+    try {
+      await signIn();
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Erro SignIn', 'Não foi possível realizar o login!');
+    }
+  }
+
+  
   return (
     <Container
       from={{
@@ -61,19 +72,35 @@ export function SignIn() {
             o mundo da Twitch
           </Description>
 
-          {/* <SignInButton onPress={}>
+          <SignInButton onPress={handleSignIn}>
             <SignInButtonIcon>
-              Verify if isLoggingIn is true
+              {/* Verify if isLoggingIn is true
               If it is, show an ActivityIndicator
-              Otherwise, show Fontisto's twitch icon
+              Otherwise, show Fontisto's twitch icon */}
+              {isLoggingIn ? 
+              <ActivityIndicator
+                color={theme.colors.white}
+                style={{fontSize: 20}}
+              /> 
+              : 
+              <Fontisto 
+                name='twitch'
+                style=
+                  {{
+                    fontSize: 18,
+                    color: theme.colors.white,
+                    marginRight: 1,
+                  }}
+              />}
             </SignInButtonIcon>
 
             <SignInButtonText>
-              Verify if isLoggingIn is true
+              {/* Verify if isLoggingIn is true
               If it is, show "Entrando..."
-              Otherwise, show "Entrar com Twitch"
+              Otherwise, show "Entrar com Twitch" */}
+              {isLoggingIn ? "Entrando..." : "Entrar com Twitch"}
             </SignInButtonText>
-          </SignInButton> */}
+          </SignInButton>
         </LoginInfo>
       </Content>
 
